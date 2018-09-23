@@ -21,7 +21,7 @@ public class AssetDataDecoderComponentImplTest {
 
     @Test
     public void shouldGetErc20AssetData() {
-        AssetData result = decoder.getAssetAddress(ERC20_ASSET_DATA);
+        AssetData result = decoder.getAssetData(ERC20_ASSET_DATA);
 
         assertThat(result.getAddress()).isEqualTo("0xe41d2489571d322189246dafa5ebde1f4699f498");
         assertThat(result.getErcType()).isEqualTo(ErcType.ERC20);
@@ -29,7 +29,7 @@ public class AssetDataDecoderComponentImplTest {
 
     @Test
     public void shouldGetErc271AssetData() {
-        AssetData result = decoder.getAssetAddress(ERC271_ASSET_DATA);
+        AssetData result = decoder.getAssetData(ERC271_ASSET_DATA);
 
         assertThat(result.getAddress()).isEqualTo("0x371b13d97f4bf77d724e78c16b7dc74099f40e84");
         assertThat(result.getTokenId()).isEqualTo(99);
@@ -38,11 +38,11 @@ public class AssetDataDecoderComponentImplTest {
 
     @Test(expected = AssetDataDecoderException.class)
     public void shouldThrowExceptionWhenUnableToParseAssetData() {
-        decoder.getAssetAddress(null);
+        decoder.getAssetData(null);
     }
 
     @Test(expected = AssetDataDecoderException.class)
     public void shouldThrowExceptionWhenUnrecognisedAssetProxyId() {
-        decoder.getAssetAddress("dodgyAssetProxyId");
+        decoder.getAssetData("dodgyAssetProxyId");
     }
 }

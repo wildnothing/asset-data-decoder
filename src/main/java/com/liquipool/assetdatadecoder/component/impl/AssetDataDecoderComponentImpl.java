@@ -14,12 +14,12 @@ public class AssetDataDecoderComponentImpl implements AssetDataDecoderComponent 
     private static final String ADDRESS_PREFIX = "0x";
 
     @Override
-    public AssetData getAssetAddress(String assetData) {
+    public AssetData getAssetData(String assetData) {
         try {
             if (isErc20(assetData)) {
-                return getErc20Address(assetData);
+                return getErc20AssetData(assetData);
             } else if(isErc271(assetData)) {
-                return getErc271Address(assetData);
+                return getErc271AssetData(assetData);
             }
         } catch(Exception e) {
             throw new AssetDataDecoderException("Error while parsing asset data: " + assetData, e);
@@ -36,11 +36,11 @@ public class AssetDataDecoderComponentImpl implements AssetDataDecoderComponent 
         return StringUtils.equals(Constants.ERC271_ASSET_PROXY_ID, assetData.substring(0, 10));
     }
 
-    private AssetData getErc20Address(String assetData) {
+    private AssetData getErc20AssetData(String assetData) {
         return new AssetData(ADDRESS_PREFIX + assetData.substring(assetData.length() - 40), ErcType.ERC20);
     }
 
-    private AssetData getErc271Address(String assetData) {
+    private AssetData getErc271AssetData(String assetData) {
         return new AssetData(ADDRESS_PREFIX + assetData.substring(34, 74), getTokenId(assetData), ErcType.ERC271);
     }
 

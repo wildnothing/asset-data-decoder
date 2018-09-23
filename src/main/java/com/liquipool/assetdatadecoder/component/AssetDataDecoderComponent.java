@@ -4,5 +4,5 @@ import com.liquipool.assetdatadecoder.domain.AssetData;
 
 public interface AssetDataDecoderComponent {
 
-    AssetData getAssetAddress(String assetData);
+    AssetData getAssetData(String assetData);
 }
